@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site Status</title>
+<meta name="description" content="Live uptime status for Prajjawal Singh's sites and APIs.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='6' fill='%2322a06b'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #16181d; --muted: #5f6673; --border: #e3e6eb;
+    --up: #1f9d63; --up-soft: #e6f6ee; --warn: #c98a06; --warn-soft: #fdf4dd;
+    --down: #d93a3a; --down-soft: #fdeaea; --empty: #dfe3e8; --accent: #2f6fdf;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1115; --card: #171a21; --text: #e8eaee; --muted: #9aa1ad; --border: #262b35;
+      --up: #34c483; --up-soft: #12291f; --warn: #e3a92b; --warn-soft: #2d2412;
+      --down: #f06363; --down-soft: #2f1717; --empty: #2a2f3a; --accent: #6b9bff;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1115; --card: #171a21; --text: #e8eaee; --muted: #9aa1ad; --border: #262b35;
+    --up: #34c483; --up-soft: #12291f; --warn: #e3a92b; --warn-soft: #2d2412;
+    --down: #f06363; --down-soft: #2f1717; --empty: #2a2f3a; --accent: #6b9bff;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 16px 48px; }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+  h1 { font-size: 22px; margin: 0; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  button.theme {
+    background: var(--card); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 10px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+  .banner {
+    display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 12px;
+    font-weight: 600; font-size: 17px; margin-bottom: 20px; border: 1px solid transparent;
+  }
+  .banner .dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+  .banner.up { background: var(--up-soft); color: var(--up); border-color: color-mix(in srgb, var(--up) 30%, transparent); }
+  .banner.up .dot { background: var(--up); }
+  .banner.degraded { background: var(--warn-soft); color: var(--warn); border-color: color-mix(in srgb, var(--warn) 30%, transparent); }
+  .banner.degraded .dot { background: var(--warn); }
+  .banner.down { background: var(--down-soft); color: var(--down); border-color: color-mix(in srgb, var(--down) 30%, transparent); }
+  .banner.down .dot { background: var(--down); }
+  .banner.loading { background: var(--card); color: var(--muted); border-color: var(--border); }
+  .banner.loading .dot { background: var(--empty); }
+  .banner small { display: block; font-weight: 400; font-size: 13px; opacity: .85; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .row { padding: 14px 18px; border-top: 1px solid var(--border); }
+  .row:first-child { border-top: 0; }
+  .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .name { font-weight: 600; }
+  .name a { color: var(--muted); font-weight: 400; font-size: 12.5px; text-decoration: none; margin-left: 8px; word-break: break-all; }
+  .name a:hover { color: var(--accent); text-decoration: underline; }
+  .meta { display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .pill { font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; }
+  .pill.up { background: var(--up-soft); color: var(--up); }
+  .pill.degraded { background: var(--warn-soft); color: var(--warn); }
+  .pill.down { background: var(--down-soft); color: var(--down); }
+  .pill.unknown { background: var(--empty); color: var(--muted); }
+  .bars { display: flex; gap: 2px; margin-top: 10px; height: 28px; }
+  .bar { flex: 1; border-radius: 2px; background: var(--empty); min-width: 2px; }
+  .bar.up { background: var(--up); }
+  .bar.warn { background: var(--warn); }
+  .bar.down { background: var(--down); }
+  .axis { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+  .err { margin-top: 6px; font-size: 12.5px; color: var(--down); word-break: break-word; }
+  footer { color: var(--muted); font-size: 12.5px; margin-top: 18px; text-align: center; }
+  footer a { color: var(--accent); }
+  #tip {
+    position: fixed; pointer-events: none; background: var(--text); color: var(--bg);
+    font-size: 12px; padding: 5px 8px; border-radius: 6px; white-space: nowrap; display: none; z-index: 10;
+  }
+  @media (max-width: 560px) {
+    .wrap { padding-top: 20px; }
+    .name a { display: block; margin-left: 0; }
+    .meta { gap: 10px; }
+    .bars { height: 24px; gap: 1px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Site Status</h1>
+      <div class="sub" id="updated">Loading…</div>
+    </div>
+    <button class="theme" id="theme" type="button" aria-label="Toggle colour theme">Theme</button>
+  </header>
+
+  <div class="banner loading" id="banner"><span class="dot"></span><div>Loading status…</div></div>
+
+  <div class="card" id="list"></div>
+
+  <footer>
+    Checked every 30 minutes by GitHub Actions ·
+    <a href="https://github.com/Prajjawalsingh87/site-status">source &amp; history</a>
+  </footer>
+</div>
+<div id="tip"></div>
+
+<script>
+(function () {
+  "use strict";
+  var DAYS = 30;
+  var root = document.documentElement;
+
+  // theme toggle (per-viewer convenience only)
+  try { var saved = localStorage.getItem("theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  document.getElementById("theme").addEventListener("click", function () {
+    var dark = root.getAttribute("data-theme")
+      ? root.getAttribute("data-theme") === "dark"
+      : matchMedia("(prefers-color-scheme: dark)").matches;
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function ago(iso) {
+    var s = Math.max(0, (Date.now() - new Date(iso).getTime()) / 1000);
+    if (s < 90) return "just now";
+    if (s < 5400) return Math.round(s / 60) + " min ago";
+    if (s < 129600) return Math.round(s / 3600) + " h ago";
+    return Math.round(s / 86400) + " days ago";
+  }
+  function dayKey(d) { return d.toISOString().slice(0, 10); }
+  function fmtPct(p) { return p == null ? "–" : (p >= 99.995 ? "100" : p.toFixed(2)) + "%"; }
+
+  function bust(url) { return url + "?t=" + Date.now(); }
+
+  Promise.all([
+    fetch(bust("data/latest.json")).then(function (r) { if (!r.ok) throw new Error("latest.json " + r.status); return r.json(); }),
+    fetch(bust("data/history.jsonl")).then(function (r) { return r.ok ? r.text() : ""; }).catch(function () { return ""; })
+  ]).then(function (res) { render(res[0], res[1]); })
+    .catch(function (err) {
+      var b = document.getElementById("banner");
+      b.className = "banner loading";
+      b.lastChild.textContent = "Could not load status data (" + err.message + ").";
+      document.getElementById("updated").textContent = "";
+    });
+
+  function render(latest, historyText) {
+    // aggregate history: per site, per UTC day -> [ok, total]
+    var today = new Date(); today.setUTCHours(0, 0, 0, 0);
+    var days = [];
+    for (var i = DAYS - 1; i >= 0; i--) days.push(dayKey(new Date(today.getTime() - i * 86400000)));
+    var first = days[0];
+    var agg = {};
+    historyText.split("\n").forEach(function (line) {
+      if (!line.trim()) return;
+      var e; try { e = JSON.parse(line); } catch (x) { return; }
+      var k = e.t.slice(0, 10);
+      if (k < first) return;
+      Object.keys(e.r).forEach(function (name) {
+        var s = agg[name] || (agg[name] = { days: {}, ok: 0, total: 0 });
+        var d = s.days[k] || (s.days[k] = [0, 0]);
+        var ok = e.r[name][0] ? 1 : 0;
+        d[0] += ok; d[1] += 1; s.ok += ok; s.total += 1;
+      });
+    });
+
+    var sites = latest.sites || [];
+    var down = sites.filter(function (s) { return s.state === "down"; });
+    var slow = sites.filter(function (s) { return s.state === "degraded"; });
+    var banner = document.getElementById("banner");
+    var state = down.length ? "down" : slow.length ? "degraded" : "up";
+    banner.className = "banner " + state;
+    var msg = el("div", null,
+      state === "up" ? "All systems operational"
+      : state === "degraded" ? "All systems up, some responding slowly"
+      : (down.length === sites.length ? "All systems down" : down.length + " of " + sites.length + " systems down"));
+    if (down.length) msg.appendChild(el("small", null, down.map(function (s) { return s.name; }).join(", ")));
+    banner.replaceChild(msg, banner.lastChild);
+
+    var gen = latest.generated_at;
+    var upd = document.getElementById("updated");
+    upd.textContent = "Last checked " + ago(gen) + " · " + new Date(gen).toLocaleString();
+
+    var list = document.getElementById("list");
+    list.textContent = "";
+    sites.forEach(function (s) {
+      var a = agg[s.name] || { days: {}, ok: 0, total: 0 };
+      var row = el("div", "row");
+      var top = el("div", "top");
+      var name = el("div", "name", s.name);
+      var link = el("a", null, s.url.replace(/^https?:\/\//, ""));
+      link.href = s.url; link.target = "_blank"; link.rel = "noopener";
+      name.appendChild(link);
+      var meta = el("div", "meta");
+      meta.appendChild(el("span", null, s.ms != null ? s.ms + " ms" : "–"));
+      meta.appendChild(el("span", null, fmtPct(a.total ? a.ok / a.total * 100 : null) + " uptime"));
+      meta.appendChild(el("span", "pill " + (s.state || "unknown"),
+        s.state === "up" ? "Operational" : s.state === "degraded" ? "Slow" : s.state === "down" ? "Down" : "Unknown"));
+      top.appendChild(name); top.appendChild(meta);
+      row.appendChild(top);
+
+      var bars = el("div", "bars");
+      days.forEach(function (k) {
+        var d = a.days[k];
+        var b = el("div", "bar");
+        var tip = k + ": no data";
+        if (d && d[1]) {
+          var p = d[0] / d[1] * 100;
+          b.className += p >= 99.995 ? " up" : p >= 95 ? " warn" : " down";
+          tip = k + ": " + fmtPct(p) + " (" + d[0] + "/" + d[1] + " checks)";
+        }
+        b.setAttribute("data-tip", tip);
+        b.setAttribute("aria-label", tip);
+        bars.appendChild(b);
+      });
+      row.appendChild(bars);
+      var axis = el("div", "axis");
+      axis.appendChild(el("span", null, DAYS + " days ago"));
+      axis.appendChild(el("span", null, "Today"));
+      row.appendChild(axis);
+      if (s.state === "down" && s.error) row.appendChild(el("div", "err", s.error));
+      list.appendChild(row);
+    });
+
+    var tipEl = document.getElementById("tip");
+    list.addEventListener("mousemove", function (ev) {
+      var t = ev.target.getAttribute && ev.target.getAttribute("data-tip");
+      if (!t) { tipEl.style.display = "none"; return; }
+      tipEl.textContent = t;
+      tipEl.style.display = "block";
+      var x = Math.min(ev.clientX + 12, window.innerWidth - tipEl.offsetWidth - 8);
+      tipEl.style.left = x + "px";
+      tipEl.style.top = (ev.clientY + 14) + "px";
+    });
+    list.addEventListener("mouseleave", function () { tipEl.style.display = "none"; });
+  }
+})();
+</script>
+</body>
+</html>

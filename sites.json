@@ -1,0 +1,15 @@
+[
+  {"name": "Currency Converter", "url": "https://real-time-currencyconverter.vercel.app", "expect": {"status": 200}},
+  {"name": "Portfolio", "url": "https://portfolio-ashy-three-70.vercel.app", "expect": {"status": 200, "text": "Prajjawal"}},
+  {"name": "Todo", "url": "https://todo-chi-vert.vercel.app", "expect": {"status": 200}},
+  {"name": "Password Generator", "url": "https://passwordgenerator-three-steel.vercel.app", "expect": {"status": 200}},
+  {"name": "Background Color Changer", "url": "https://bacgroundcolorchnager.vercel.app", "expect": {"status": 200}},
+  {"name": "Quiz Competition", "url": "https://quiz-competition-plum.vercel.app", "expect": {"status": 200}},
+  {"name": "Orbit (frontend)", "url": "https://social-media-application-7gjn.vercel.app", "expect": {"status": 200}},
+  {"name": "Orbit API (health)", "url": "https://social-media-application-eta.vercel.app/health", "expect": {"status": 200, "json": {"status": "ok"}}},
+  {"name": "ScholarSpace", "url": "https://scholarspace-seven.vercel.app", "expect": {"status": 200, "text": "ScholarSpace"}},
+  {"name": "SnapLink", "url": "https://snaplink-ten-eosin.vercel.app", "expect": {"status": 200, "text": "SnapLink"}},
+  {"name": "SnapLink (API health)", "url": "https://snaplink-ten-eosin.vercel.app/api/health", "expect": {"status": 200, "json": {"status": "healthy"}}},
+  {"name": "SnapLink API (standalone)", "url": "https://snaplink-api-six.vercel.app/health", "expect": {"status": 200, "json": {"status": "healthy"}}},
+  {"name": "File Agent (Render)", "url": "https://file-agent.onrender.com/health", "expect": {"status": 200, "json": {"status": "ok"}}, "timeout": 90, "retry_delay": 20}
+]

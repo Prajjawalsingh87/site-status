@@ -1,0 +1,150 @@
+{
+  "generated_at": "2026-10-20T18:45:17Z",
+  "overall": "degraded",
+  "down": [],
+  "sites": [
+    {
+      "name": "Currency Converter",
+      "url": "https://real-time-currencyconverter.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 1422,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:18Z"
+    },
+    {
+      "name": "Portfolio",
+      "url": "https://portfolio-ashy-three-70.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 400,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:17Z"
+    },
+    {
+      "name": "Todo",
+      "url": "https://todo-chi-vert.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 1428,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:18Z"
+    },
+    {
+      "name": "Password Generator",
+      "url": "https://passwordgenerator-three-steel.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 1669,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:19Z"
+    },
+    {
+      "name": "Background Color Changer",
+      "url": "https://bacgroundcolorchnager.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 395,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:17Z"
+    },
+    {
+      "name": "Quiz Competition",
+      "url": "https://quiz-competition-plum.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 426,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:17Z"
+    },
+    {
+      "name": "Orbit (frontend)",
+      "url": "https://social-media-application-7gjn.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 163,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:17Z"
+    },
+    {
+      "name": "Orbit API (health)",
+      "url": "https://social-media-application-eta.vercel.app/health",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 427,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:17Z"
+    },
+    {
+      "name": "ScholarSpace",
+      "url": "https://scholarspace-seven.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 142,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:17Z"
+    },
+    {
+      "name": "SnapLink",
+      "url": "https://snaplink-ten-eosin.vercel.app",
+      "state": "up",
+      "ok": true,
+      "status": 200,
+      "ms": 151,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:17Z"
+    },
+    {
+      "name": "SnapLink (API health)",
+      "url": "https://snaplink-ten-eosin.vercel.app/api/health",
+      "state": "degraded",
+      "ok": true,
+      "status": 200,
+      "ms": 15048,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:32Z"
+    },
+    {
+      "name": "SnapLink API (standalone)",
+      "url": "https://snaplink-api-six.vercel.app/health",
+      "state": "degraded",
+      "ok": true,
+      "status": 200,
+      "ms": 13009,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:45:30Z"
+    },
+    {
+      "name": "File Agent (Render)",
+      "url": "https://file-agent.onrender.com/health",
+      "state": "degraded",
+      "ok": true,
+      "status": 200,
+      "ms": 52975,
+      "error": null,
+      "attempts": 1,
+      "checked_at": "2026-10-20T18:46:10Z"
+    }
+  ]
+}
