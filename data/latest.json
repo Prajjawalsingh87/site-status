@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-20T18:46:34Z",
-  "overall": "up",
+  "generated_at": "2026-10-20T22:07:22Z",
+  "overall": "degraded",
   "down": [],
   "sites": [
     {
@@ -9,10 +9,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 275,
+      "ms": 42,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "Portfolio",
@@ -20,10 +20,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 253,
+      "ms": 142,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "Todo",
@@ -31,10 +31,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 239,
+      "ms": 41,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "Password Generator",
@@ -42,10 +42,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 337,
+      "ms": 39,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "Background Color Changer",
@@ -53,10 +53,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 280,
+      "ms": 40,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "Quiz Competition",
@@ -64,10 +64,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 276,
+      "ms": 35,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "Orbit (frontend)",
@@ -75,10 +75,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 277,
+      "ms": 31,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "Orbit API (health)",
@@ -86,10 +86,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 338,
+      "ms": 3270,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:26Z"
     },
     {
       "name": "ScholarSpace",
@@ -97,10 +97,10 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 688,
+      "ms": 41,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "SnapLink",
@@ -108,43 +108,43 @@
       "state": "up",
       "ok": true,
       "status": 200,
-      "ms": 163,
+      "ms": 44,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:23Z"
     },
     {
       "name": "SnapLink (API health)",
       "url": "https://snaplink-ten-eosin.vercel.app/api/health",
-      "state": "up",
+      "state": "degraded",
       "ok": true,
       "status": 200,
-      "ms": 2174,
+      "ms": 15864,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:37Z"
+      "checked_at": "2026-10-20T22:07:38Z"
     },
     {
       "name": "SnapLink API (standalone)",
       "url": "https://snaplink-api-six.vercel.app/health",
-      "state": "up",
+      "state": "degraded",
       "ok": true,
       "status": 200,
-      "ms": 2181,
+      "ms": 13441,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:37Z"
+      "checked_at": "2026-10-20T22:07:36Z"
     },
     {
       "name": "File Agent (Render)",
       "url": "https://file-agent.onrender.com/health",
-      "state": "up",
+      "state": "degraded",
       "ok": true,
       "status": 200,
-      "ms": 163,
+      "ms": 31204,
       "error": null,
       "attempts": 1,
-      "checked_at": "2026-10-20T18:46:35Z"
+      "checked_at": "2026-10-20T22:07:54Z"
     }
   ]
 }
