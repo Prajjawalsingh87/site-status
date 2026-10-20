@@ -77,13 +77,22 @@ def main() -> int:
     gh("POST", f"/repos/{REPO}/labels",
        {"name": LABEL, "color": "d73a4a", "description": "Opened automatically by the uptime monitor"})
 
+    # oldest first, so the original issue wins if a duplicate ever slipped in
     open_issues = {}
     page = 1
     while True:
-        batch = gh("GET", f"/repos/{REPO}/issues?state=open&labels={LABEL}&per_page=100&page={page}")
+        batch = gh("GET", f"/repos/{REPO}/issues?state=open&labels={LABEL}"
+                          f"&sort=created&direction=asc&per_page=100&page={page}")
         for issue in batch:
-            if "pull_request" not in issue:
-                open_issues.setdefault(issue["title"], issue)
+            if "pull_request" in issue:
+                continue
+            keep = open_issues.setdefault(issue["title"], issue)
+            if keep is not issue:  # duplicate (e.g. API read-after-write lag): fold it into the original
+                gh("POST", f"/repos/{REPO}/issues/{issue['number']}/comments",
+                   {"body": f"Duplicate of #{keep['number']}."})
+                gh("PATCH", f"/repos/{REPO}/issues/{issue['number']}",
+                   {"state": "closed", "state_reason": "not_planned"})
+                print(f"closed duplicate #{issue['number']} of #{keep['number']}")
         if len(batch) < 100:
             break
         page += 1
